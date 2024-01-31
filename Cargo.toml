@@ -2,7 +2,11 @@
 name = "bevy_game" # ToDo
 version = "0.1.0"
 publish = false
-authors = ["Niklas Eicker <git@nikl.me>"] # ToDo: you are the author ;)
+authors = [
+    "5-23 <rustacean@5-23.dev>",
+    "hy <email>",
+    "Niklas Eicker <git@nikl.me>",
+]
 edition = "2021"
 exclude = ["dist", "build", "assets", "credits"]
 
