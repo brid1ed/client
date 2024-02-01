@@ -30,7 +30,6 @@ fn main() {
         }))
         .add_systems(Startup, set_window_icon)
         .add_systems(Startup, startup)
-        .add_systems(Startup, start::page::page)
         .run();
 }
 
