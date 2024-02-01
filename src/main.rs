@@ -1,9 +1,9 @@
 use bevy::asset::AssetMetaCheck;
 use bevy::prelude::*;
-use bevy::ui::DefaultCameraView;
 use bevy::window::PrimaryWindow;
 use bevy::winit::WinitWindows;
 use bevy::DefaultPlugins;
+use common::util::HexToRgb;
 use std::io::Cursor;
 use winit::window::Icon;
 
@@ -14,8 +14,8 @@ fn main() {
     App::new()
         .insert_resource(Msaa::Off)
         .insert_resource(AssetMetaCheck::Never)
-        .insert_resource(ClearColor(common::util::hex_to_rgb("30183C")))
-        .add_plugins(start::layout::LayoutPlugin)
+        .insert_resource(ClearColor("30183C".to_color()))
+        .add_plugins(start::StartPlugin)
         .add_plugins(DefaultPlugins.set(WindowPlugin {
             primary_window: Some(Window {
                 title: "Bevy game".to_string(), // ToDo
