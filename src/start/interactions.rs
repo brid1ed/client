@@ -1,5 +1,3 @@
-// use std::*;
-
 // 0. welcome 1. welcome back 2. ban
 pub fn set_first_page(status: i32) {
     //

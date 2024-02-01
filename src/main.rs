@@ -15,6 +15,7 @@ fn main() {
         .insert_resource(Msaa::Off)
         .insert_resource(AssetMetaCheck::Never)
         .insert_resource(ClearColor(common::util::hex_to_rgb("30183C")))
+        .add_plugins(start::layout::LayoutPlugin)
         .add_plugins(DefaultPlugins.set(WindowPlugin {
             primary_window: Some(Window {
                 title: "Bevy game".to_string(), // ToDo
@@ -53,5 +54,6 @@ fn set_window_icon(
 }
 
 fn startup(mut commands: Commands) {
+    // let a = unsafe { start::layout };
     commands.spawn(Camera2dBundle::default());
 }
