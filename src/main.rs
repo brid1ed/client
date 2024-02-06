@@ -18,7 +18,7 @@ fn main() {
         .add_plugins(start::StartPlugin)
         .add_plugins(DefaultPlugins.set(WindowPlugin {
             primary_window: Some(Window {
-                title: "Bevy game".to_string(), // ToDo
+                title: "helio.win".to_string(), // ToDo
                 // Bind to canvas included in `index.html`
                 canvas: Some("#bevy".to_owned()),
                 // The canvas size is constrained in index.html and build/web/styles.css
