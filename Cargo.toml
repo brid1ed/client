@@ -68,8 +68,9 @@ webbrowser = { version = "0.8", features = ["hardened"] }
 # keep the following in sync with Bevy's dependencies
 winit = { version = "0.28.7", default-features = false }
 image = { version = "0.24", default-features = false }
-renet = { version = "0.0.14", features = ["serde"] }
+renet =  version = "0.0.14", features = ["serde"] }
 bincode = "1.3.3"
+serde = { version = "1.0.196", features = ["derive"] }
 util = { git="https://github.com/helloww-in/util" }
 
 [build-dependencies]
