@@ -38,36 +38,16 @@ dev = ["bevy/dynamic_linking"]
 # All of Bevy's default features exept for the audio related ones (bevy_audio, vorbis), since they clash with bevy_kira_audio
 #   and android_shared_stdcxx, since that is covered in `mobile`
 [dependencies]
-bevy = { version = "0.12", default-features = false, features = [
-    "animation",
-    "bevy_asset",
-    "bevy_gilrs",
-    "bevy_scene",
-    "bevy_winit",
-    "bevy_core_pipeline",
-    "bevy_pbr",
-    "bevy_gltf",
-    "bevy_render",
-    "bevy_sprite",
-    "bevy_text",
-    "bevy_ui",
-    "multi-threaded",
-    "png",
-    "hdr",
-    "x11",
-    "bevy_gizmos",
-    "tonemapping_luts",
-    "default_font",
-    "webgl2",
-] }
+bevy = { version = "0.13", default-features = false, features = ["animation", "bevy_asset", "bevy_gilrs", "bevy_scene", "bevy_winit", "bevy_core_pipeline", "bevy_pbr", "bevy_gltf", "bevy_render", "bevy_sprite", "bevy_text", "bevy_ui", "multi-threaded", "png", "hdr", "x11", "bevy_gizmos", "tonemapping_luts", "default_font", "webgl2"] }
 bevy_kira_audio = { version = "0.18" }
 bevy_asset_loader = { version = "0.19" }
 rand = { version = "0.8.3" }
 webbrowser = { version = "0.8", features = ["hardened"] }
 
 # keep the following in sync with Bevy's dependencies
-winit = { version = "0.28.7", default-features = false }
+winit = { version = "0.29", default-features = false }
 image = { version = "0.24", default-features = false }
+
 renet = { version = "0.0.14", features = ["serde"] }
 bincode = "1.3.3"
 serde = { version = "1.0.196", features = ["derive"] }

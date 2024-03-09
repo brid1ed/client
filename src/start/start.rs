@@ -1,27 +1,24 @@
-use crate::common::util::{self, HexToRgb};
-use crate::start::inputs;
+use crate::common::color;
+use crate::common::components::text_field;
+use crate::common::util::HexToRgb;
 use bevy::prelude::*;
 
 pub struct StartPlugin;
 
 impl Plugin for StartPlugin {
     fn build(&self, app: &mut App) {
-        app.add_plugins(inputs::InputPlugin)
-        // .add_systems(Startup, startup)
-        ;
+        app.add_plugins(text_field::TextFieldPlugin)
+            .add_systems(Startup, setup);
     }
 }
 
-fn startup(mut commands: Commands) {
-    commands.spawn(NodeBundle {
-        background_color: BackgroundColor("ffffff".to_color()),
-        style: Style {
-            width: Val::Px(480.0),
-            height: Val::Px(120.0),
-            align_self: AlignSelf::Center,
-            justify_self: JustifySelf::Center,
+fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
+    commands
+        .spawn(NodeBundle::default())
+        .insert(text_field::TextField {
+            text: "adsf".to_string(),
+            padding_horizontal: 20.0,
+            padding_vertical: 12.0,
             ..Default::default()
-        },
-        ..Default::default()
-    });
+        });
 }
