@@ -1,3 +1,0 @@
-[build]
-rustflags = ["-Z", "threads=20"]
-linker = "clang"
