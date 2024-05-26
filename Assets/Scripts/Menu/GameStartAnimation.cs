@@ -35,7 +35,7 @@ namespace Menu
 
         void Start() {
             fade_animation = new FadeAnimation();
-            
+            GameManager.Instance.GetEntityManager().AddEntity("test");
             StartCoroutine(fade_animation.FadeBoth(delay, 0.01f,
                                                             team_logo_image, -0.05f));
         }
