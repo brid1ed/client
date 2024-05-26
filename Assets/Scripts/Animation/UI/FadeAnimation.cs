@@ -38,50 +38,85 @@ namespace Animation.UI {
         }
         
     }
-    public class FadeAnimation {
+    public class FadeAnimation
+    {
+        private bool check_animation;
+
+        public FadeAnimation() { check_animation = false; }
         
-        public IEnumerator FadeBoth(float delay, float speed,
-                                    Image image, float start_visibility = 0f) {
-            FadeImage fade_image = new FadeImage(speed, start_visibility);
-            
-            while (fade_image.GetVisibility() < 1f) {
-                yield return new WaitForSeconds(delay);
-                image.color = fade_image.GetColor();
-                fade_image.In();
-            }
-
-            yield return new WaitForSeconds(delay+0.1f);
-            
-            while (fade_image.GetVisibility() > 0f) {
-                fade_image.Out();
-                image.color = fade_image.GetColor();
-                yield return new WaitForSeconds(delay);
-            }
-            
-        }
-
-        public IEnumerator FadeIn(float delay, float speed,
-                                    Image image, float start_visibility = 0f) {
-            FadeImage fade_image = new FadeImage(speed, start_visibility);
-            while (fade_image.GetVisibility() < 1f) {
-                
-                yield return new WaitForSeconds(delay);
-                image.color = fade_image.GetColor();
-                fade_image.In();
-            }
-        }
-
-        public IEnumerator FadeOut(float delay, float speed,
-                                    Image image,float start_visibility = 0f)
+        public IEnumerator FadeBoth(Image image = null, float delay = 0f, float speed = 0.01f, float start_visibility = 0f)
         {
-            FadeImage fade_image = new FadeImage(speed,start_visibility);
-            
-            while (fade_image.GetVisibility() < 1f) {
-                yield return new WaitForSeconds(delay);
-                image.color = fade_image.GetColor();
-                fade_image.Out();
+            if (image != null)
+            {
+
+                while (check_animation) yield return new WaitForSeconds(0.2f);
+                check_animation = true;
+
+                bool time_delta = delay == 0;
+
+                FadeImage fade_image = new FadeImage(speed, start_visibility);
+
+                while (fade_image.GetVisibility() < 1f)
+                {
+                    yield return new WaitForSeconds(time_delta ? Time.deltaTime : delay);
+                    image.color = fade_image.GetColor();
+                    fade_image.In();
+                }
+
+                yield return new WaitForSeconds(delay + 0.1f);
+
+                while (fade_image.GetVisibility() > 0f)
+                {
+                    fade_image.Out();
+                    image.color = fade_image.GetColor();
+                    yield return new WaitForSeconds(time_delta ? Time.deltaTime : delay);
+                }
+
+                check_animation = false;
             }
         }
-        
+
+        public IEnumerator FadeIn(Image image = null, float delay = 0f, float speed = 0.01f, float start_visibility = 0f)
+        {
+            if (image != null) {
+                while (check_animation) yield return new WaitForSeconds(0.2f);
+                check_animation = true;
+                bool time_delta = delay == 0;
+
+                FadeImage fade_image = new FadeImage(speed, start_visibility);
+                while (fade_image.GetVisibility() < 1f)
+                {
+
+                    yield return new WaitForSeconds(time_delta ? Time.deltaTime : delay);
+                    image.color = fade_image.GetColor();
+                    fade_image.In();
+                }
+
+                check_animation = false;
+            }
+        }
+
+        public IEnumerator FadeOut(Image image = null, float delay = 0f, float speed = 0.01f, float start_visibility = 0f)
+        {
+            if (image != null)
+            {
+                while (check_animation) yield return new WaitForSeconds(0.2f);
+                bool time_delta = delay == 0;
+                check_animation = true;
+
+
+                FadeImage fade_image = new FadeImage(speed, start_visibility);
+
+                while (fade_image.GetVisibility() < 1f)
+                {
+                    yield return new WaitForSeconds(time_delta ? Time.deltaTime : delay);
+                    image.color = fade_image.GetColor();
+                    fade_image.Out();
+                }
+
+                check_animation = false;
+            }
+        }
+
     }
 }

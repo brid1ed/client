@@ -17,10 +17,7 @@ namespace Manager
             
             return false;
         }
-        public void Awake() {
-            if (Init()) Debug.LogError("[EntityManager] EntityList load failed");
-            else Debug.Log("[EntityManager] EntityList load success");
-        }
+        
         
         
         
@@ -28,11 +25,10 @@ namespace Manager
 
         public void AddEntity(BaseEntity entity) { entities.Add(entity); }
 
-        public void AddEntity(string name, GameObject parent = null)
-        {
+        public GameObject AddObject(string name, GameObject parent = null) {
             GameObject game_object = new GameObject(name);
             if (parent != null) game_object.transform.parent = parent.transform;
-            Instantiate(game_object);
+            return Instantiate(game_object);
             // BaseEntity entity = new BaseEntity();
         }
         

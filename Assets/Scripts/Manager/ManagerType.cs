@@ -5,7 +5,7 @@ namespace Manager
         GameManager,
         EntityManager,
         EventManager,
-        
+        SoundManager,
     }
     
     

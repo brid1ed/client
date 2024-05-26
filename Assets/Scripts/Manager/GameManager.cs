@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Manager.DesignPattern;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Manager
 {
@@ -23,20 +24,28 @@ namespace Manager
                 {ManagerType.EntityManager, "EntityManager"},
                 {ManagerType.EventManager, "EventManager"},
                 {ManagerType.GameManager, "GameManager"},
+                { ManagerType.SoundManager, "SoundManager"}
             };
             
             // manager add
             managers.Add(ManagerType.EntityManager,
                  this.gameObject.AddComponent(typeof(EntityManager)) as EntityManager); // Entity Manager
-
+            managers.Add(ManagerType.SoundManager,
+                this.gameObject.AddComponent(typeof(SoundManager)) as SoundManager); // Sound Manager
+            
+            
 
             bool check_error = false;
             // error check
             foreach (ManagerType type in managers.Keys) {
-                
                 switch (type) {
                     case ManagerType.EventManager:
                     case ManagerType.EntityManager:
+                    case ManagerType.SoundManager:
+                        if (managers[type].Init()) 
+                            Debug.LogError($"[{manager_names[type]}] {manager_names[type]} load failed");
+                        else
+                            Debug.Log($"[{manager_names[type]}] {manager_names[type]} load success");
                         break;
                     default:
                         Debug.LogError($"[GameManager] Manager Load Error!, {manager_names[type]}");
@@ -44,6 +53,7 @@ namespace Manager
                         break;
                 }
             }
+            
             if(check_error)
                 GameQuit();
             
@@ -58,6 +68,10 @@ namespace Manager
 
         public EntityManager GetEntityManager() {
             return ((EntityManager) managers[ManagerType.EntityManager]);
+        }
+
+        public SoundManager GetSoundManager() {
+            return ((SoundManager) managers[ManagerType.SoundManager]);
         }
         
         #endregion ManagerGet
