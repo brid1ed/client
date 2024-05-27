@@ -30,6 +30,7 @@ namespace Manager
             // manager add
             managers.Add(ManagerType.EntityManager,
                  this.gameObject.AddComponent(typeof(EntityManager)) as EntityManager); // Entity Manager
+            
             managers.Add(ManagerType.SoundManager,
                 this.gameObject.AddComponent(typeof(SoundManager)) as SoundManager); // Sound Manager
             
@@ -69,7 +70,7 @@ namespace Manager
         public EntityManager GetEntityManager() {
             return ((EntityManager) managers[ManagerType.EntityManager]);
         }
-
+        
         public SoundManager GetSoundManager() {
             return ((SoundManager) managers[ManagerType.SoundManager]);
         }

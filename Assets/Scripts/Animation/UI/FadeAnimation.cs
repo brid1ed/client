@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace Animation.UI {
@@ -118,5 +119,19 @@ namespace Animation.UI {
             }
         }
 
+        public IEnumerator FadeInChildren(GameObject game_object, float delay = 0f,
+                                            float speed = 0.01f, float start_visibility = 0f)
+        {
+            if (game_object != null)
+            {
+                List<Image> images = new List<Image>();
+
+                foreach (Image child in game_object.GetComponentsInChildren<Image>()) images.Add(child);
+                
+                
+            }
+
+
+        }
     }
 }
