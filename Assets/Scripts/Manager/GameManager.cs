@@ -13,7 +13,7 @@ namespace Manager
 
         public Dictionary<ManagerType, BaseManager> managers;
         public Dictionary<ManagerType, string> manager_names;
-
+        
 
 
         private void Init()
@@ -24,7 +24,8 @@ namespace Manager
                 {ManagerType.EntityManager, "EntityManager"},
                 {ManagerType.EventManager, "EventManager"},
                 {ManagerType.GameManager, "GameManager"},
-                { ManagerType.SoundManager, "SoundManager"}
+                { ManagerType.SoundManager, "SoundManager"},
+                {ManagerType.SceneManager, "GameSceneManager"}
             };
             
             // manager add
@@ -33,7 +34,8 @@ namespace Manager
             
             managers.Add(ManagerType.SoundManager,
                 this.gameObject.AddComponent(typeof(SoundManager)) as SoundManager); // Sound Manager
-            
+            managers.Add(ManagerType.SceneManager,
+                this.gameObject.AddComponent(typeof(GameSceneManager)) as GameSceneManager); // Game Scene Manager
             
 
             bool check_error = false;
@@ -43,6 +45,7 @@ namespace Manager
                     case ManagerType.EventManager:
                     case ManagerType.EntityManager:
                     case ManagerType.SoundManager:
+                    case ManagerType.SceneManager:
                         if (managers[type].Init()) 
                             Debug.LogError($"[{manager_names[type]}] {manager_names[type]} load failed");
                         else
@@ -73,6 +76,10 @@ namespace Manager
         
         public SoundManager GetSoundManager() {
             return ((SoundManager) managers[ManagerType.SoundManager]);
+        }
+
+        public GameSceneManager GetSceneManager() {
+            return ((GameSceneManager) managers[ManagerType.SceneManager]);
         }
         
         #endregion ManagerGet

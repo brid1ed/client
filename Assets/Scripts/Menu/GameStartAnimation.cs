@@ -40,22 +40,22 @@ namespace Menu
             else Debug.Log("[Game-Start-Menu] Game Start");
         }
 
-        void Start()
-        {
-            
+        void Start() {
             fade_animation = new FadeAnimation();
-            StartCoroutine(fade_animation.FadeBoth(team_logo_image, delay, 0.02f, -0.05f));
             GameManager.Instance.GetSoundManager().NextSoundAdd(0, new SoundClip(netflix));
-            // GameManager.Instance.GetSoundManager().JustPlay(netflix);
+            StartCoroutine(fade_animation.FadeBoth(team_logo_image, delay, 0.02f, -0.05f));
             StartCoroutine(fade_animation.FadeIn(game_logo_image, delay, 0.01f, -0.05f));
-            // GameManager.Instance.GetSoundManager().JustPlay(start_sound);
             GameManager.Instance.GetSoundManager().NextSoundAdd(0, new SoundClip(start_sound));
-
             StartCoroutine(fade_animation.FadeIn(game_title_image, delay, 0.005f, -0.1f));
             StartCoroutine(fade_animation.FadeInChildren(Buttons, delay, 0.03f, -0.1f));
         }
         void Update() {
             
+        }
+
+
+        public void OnStartClick() {
+            GameManager.Instance.GetSceneManager().LoadScene("Test");
         }
 
 

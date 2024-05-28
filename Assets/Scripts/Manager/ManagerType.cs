@@ -6,6 +6,8 @@ namespace Manager
         EntityManager,
         EventManager,
         SoundManager,
+        SceneManager,
+        
     }
     
     

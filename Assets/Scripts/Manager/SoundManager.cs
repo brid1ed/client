@@ -48,6 +48,20 @@ namespace Manager
             source.Play();
             return true;
         }
+
+        public bool Stop()
+        {
+            source.Stop();
+            source.volume = 0;
+            return true;
+        }
+
+        public bool Pause()
+        {
+            source.Pause();
+            source.volume = 0;
+            return true;
+        }
         public bool Playing() {
             return source.isPlaying;
         }
@@ -84,8 +98,15 @@ namespace Manager
         }
 
         public void AddSoundPlayer(int count = 1) { for(int i = 0; i < count; i++) source.Add(new SoundPlay(this.gameObject)); }
-        
-        public void SetStop(bool stop) { this.stop = stop;}
+
+        public void SetStop(bool stop)
+        {
+            this.stop = stop;
+            if (!this.stop) return;
+
+            foreach (SoundPlay player in source) player.Stop();
+            
+        }
 
         public bool GetStop() { return this.stop; }
         
@@ -99,10 +120,14 @@ namespace Manager
         }
 
         private IEnumerator NextSound() {
-            while (!stop) {
-                foreach (SoundPlay player in this.source) {
-                    player.Next();
-                    yield return new WaitForSeconds(Time.deltaTime);
+            while (true) { 
+                if (stop) yield return new WaitForSeconds(Time.deltaTime);
+                else {
+                    foreach (SoundPlay player in this.source)
+                    {
+                        player.Next();
+                        yield return new WaitForSeconds(Time.deltaTime);
+                    }
                 }
             }
         }
