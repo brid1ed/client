@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Manager.DesignPattern;
+using Network;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,7 +14,7 @@ namespace Manager
 
         public Dictionary<ManagerType, BaseManager> managers;
         public Dictionary<ManagerType, string> manager_names;
-        
+        public Client client;
 
 
         private void Init()
@@ -60,7 +61,8 @@ namespace Manager
             
             if(check_error)
                 GameQuit();
-            
+
+            client = new Client();
             Debug.Log("[GameManager] Managers Loaded Success");
             
         }

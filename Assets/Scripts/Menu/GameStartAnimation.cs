@@ -5,8 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Animation.UI;
 using Manager;
-using UnityEditor;
-using UnityEngine.SceneManagement;
+
 
 namespace Menu
 {
@@ -40,7 +39,8 @@ namespace Menu
             else Debug.Log("[Game-Start-Menu] Game Start");
         }
 
-        void Start() {
+
+        public void Animation() {
             fade_animation = new FadeAnimation();
             GameManager.Instance.GetSoundManager().NextSoundAdd(0, new SoundClip(netflix));
             StartCoroutine(fade_animation.FadeBoth(team_logo_image, delay, 0.02f, -0.05f));
@@ -49,15 +49,18 @@ namespace Menu
             StartCoroutine(fade_animation.FadeIn(game_title_image, delay, 0.005f, -0.1f));
             StartCoroutine(fade_animation.FadeInChildren(Buttons, delay, 0.03f, -0.1f));
         }
-        void Update() {
-            
-        }
 
 
         public void OnStartClick() {
             GameManager.Instance.GetSceneManager().LoadScene("Test");
         }
 
+
+        public void Login()
+        {
+            GameManager.Instance.client.Login("admin", "admin");
+            StartCoroutine(GameManager.Instance.client.login.Receive());
+        }
 
 
     }

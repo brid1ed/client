@@ -1,4 +1,5 @@
 using System.Collections;
+using Network;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -19,6 +20,8 @@ namespace Manager
         {
             next_scene = "";
             bar = null;
+            Client client = new Client();
+            
             return false;
         }
 
