@@ -24,10 +24,6 @@ namespace Menu
 
         public void Send()
         {
-            JObject json = new JObject() {
-                { "hello", "helo" },
-            };
-            GameManager.Instance.client.login.Send(json);
 
         }
         

@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Animation.UI;
 using Manager;
+using Network;
 
 
 namespace Menu
@@ -48,19 +49,17 @@ namespace Menu
             GameManager.Instance.GetSoundManager().NextSoundAdd(0, new SoundClip(start_sound));
             StartCoroutine(fade_animation.FadeIn(game_title_image, delay, 0.005f, -0.1f));
             StartCoroutine(fade_animation.FadeInChildren(Buttons, delay, 0.03f, -0.1f));
+            
         }
 
 
         public void OnStartClick() {
+            
             GameManager.Instance.GetSceneManager().LoadScene("Test");
         }
 
 
-        public void Login()
-        {
-            GameManager.Instance.client.Login("admin", "admin");
-            StartCoroutine(GameManager.Instance.client.login.Receive());
-        }
+        
 
 
     }

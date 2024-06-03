@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Manager.DesignPattern;
 using Network;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,8 +16,25 @@ namespace Manager
         public Dictionary<ManagerType, BaseManager> managers;
         public Dictionary<ManagerType, string> manager_names;
         public Client client;
+        private Ref<String> token, check;
+        
+        public void Login(string name, string passwd) {
+            // GameManager.Instance.client.Login("admin", "admin");
+            client.Login(name, passwd);
+            StartCoroutine(client.login.Receive(10f, token));
+        }
 
+        public void CheckUser()
+        {
+            client.login.Send(new JObject()
+            {
+                { "token", this.token.Value }
+            }
+            );
 
+            StartCoroutine(client.login.Receive(10f, check));
+
+        }
         private void Init()
         {
             managers = new Dictionary<ManagerType, BaseManager>();
@@ -63,6 +81,9 @@ namespace Manager
                 GameQuit();
 
             client = new Client();
+
+            check = new Ref<string>("");
+            token = new Ref<string>("");
             Debug.Log("[GameManager] Managers Loaded Success");
             
         }

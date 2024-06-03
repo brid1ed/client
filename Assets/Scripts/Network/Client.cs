@@ -8,6 +8,20 @@ using UnityEngine;
 
 namespace Network {
 
+    public class Ref<T> {
+        private T backing;
+
+        public T Value
+        {
+            get{return backing;}
+            set { this.backing = value; }
+        }
+        public Ref(T reference)
+        {
+            backing = reference;
+        }
+
+    }
     public class Packet
     {
         private SendType type;
@@ -21,20 +35,27 @@ namespace Network {
         
         
     }
-    public class ClientLogin {
+    
+    public class TCP_client {
 
 
         private IPAddress ip;
         private int port;
         private static TcpClient client;
 
-
+        
+        
+        
         private bool logined;
-        public ClientLogin(IPAddress ip, int port) {
+        
+        
+        
+        public TCP_client(IPAddress ip, int port) {
             client = new TcpClient();
             logined = false;
             this.ip = ip;
             this.port = port;
+
         }
         
         
@@ -53,45 +74,64 @@ namespace Network {
         
         
         
-        public IEnumerator Receive() {
+        public IEnumerator Receive(float time_out, Ref<string> inp)
+        {
+            bool time_out_ = false;
+            time_out *= 1000;
+            long current = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
             while (true) {
                 yield return null;
-                
                 if (!client.Connected) continue;
-                if (logined) break;
+                if (logined || time_out_) break;
+                
                 try {
                     NetworkStream stream = client.GetStream();
                     byte[] buffer = new byte[1024];
                     int bytes = stream.Read(buffer, 0, buffer.Length);
-                        if (bytes <= 0) continue;
-                        string message = Encoding.UTF8.GetString(buffer, 0, bytes);
-                        Debug.Log("[Other] " + message);
-                        
+                    if (bytes <= 0) continue;
+                    string message = Encoding.UTF8.GetString(buffer, 0, bytes);
+                    inp.Value = message;
+                    
+                    break;
+
+                    // Debug.Log("[Other] " + message);
+
+                
                 } catch (Exception ex) { Debug.Log(ex.ToString()); }
-                
-                
+
+                time_out_ = ( (long) (DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond) - current >= time_out);
+
             }
+            
+            
+            if (inp.Value == "" || time_out_) Debug.Log("token loaded fail");
+            
         }
 
-        public void Send(JObject json)
-        {
+        public void Send(JObject json) {
             string message = json.ToString();
             if (message.Length <= 0) return;
-
-            try
-            {
+            try {
                 NetworkStream stream = client.GetStream();
                 byte[] buffer = Encoding.UTF8.GetBytes(message);
                 stream.Write(buffer, 0, buffer.Length);
-
-                Debug.Log("[Me] " + message);
             }
-            catch (Exception e)
-            {
+            catch (Exception e) {
                 
             }
         }
-        
+
+        public bool Check()
+        {
+            
+            
+            return false;
+        }
+
+        public void Disconnect() {
+            client.GetStream().Close();
+            client.Close();
+        }
         
         
         
@@ -111,19 +151,16 @@ namespace Network {
         private byte[] data;
         IPAddress server_address;
         private IPEndPoint sender;
-
-        public ClientLogin login;
-        
+        public TCP_client login;
+        public Ref<string> token;
         
         public Client() {
             data = new byte[2028];
             socket  = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             server_address = IPAddress.Parse(ADDRESS);
             sender = new IPEndPoint(server_address, PORT);
-            login = new ClientLogin(server_address, PORT+1);
-
+            login = new TCP_client(server_address, PORT+1);
         }
-
 
         private string GetId(SendType type)
         {
@@ -153,8 +190,6 @@ namespace Network {
             Debug.Log(obj.ToString()+"\nend");
             return obj;
         }
-        
-        
         
         public void Parser(ref byte[] req) {
             Debug.Log(req);
@@ -194,14 +229,12 @@ namespace Network {
         public void Login(string name, string passwd) {
             
             login.Connect();
-            login.Send(new JObject()
-                {
-                    {"type", GetId(SendType.JOIN)},
+            login.Send(new JObject() {
+                    {"type", GetId(SendType.LOGIN)},
                     {"name", name},
                     {"passwd", passwd}
                 }
             );
-            
             
         }
 
