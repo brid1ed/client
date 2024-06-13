@@ -49,8 +49,6 @@ namespace Manager
                 return true;
 
             }
-
-            return true;
         }
         
         
