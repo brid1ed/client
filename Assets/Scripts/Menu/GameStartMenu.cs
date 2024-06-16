@@ -1,7 +1,5 @@
 using System;
 using Manager;
-using Newtonsoft.Json.Linq;
-using UnityEditor.ShaderGraph.Serialization;
 using UnityEngine;
 
 namespace Menu
