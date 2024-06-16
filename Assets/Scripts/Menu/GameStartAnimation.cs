@@ -53,11 +53,11 @@ namespace Menu
             fade_animation = new FadeAnimation();
             StartCoroutine(fade_animation.FadeBoth(team_logo_image, delay, 0.012f, -0.05f));
             yield return new WaitForSeconds(1.3f);
+            
             GameManager.Instance.GetSoundManager().NextSoundAdd(0, new SoundClip(team_sfx, 0.6f));
 
             for (int i = 0; i < 20; i++) {
                 team_logo_image.transform.localPosition = new Vector3(UnityEngine.Random.Range(-4f, 4f), UnityEngine.Random.Range(-2f, 2f));
-
                 yield return new WaitForSeconds(0.05f);
             }
 
@@ -80,7 +80,6 @@ namespace Menu
 
 
         public void OnStartClick() {
-            
             GameManager.Instance.GetSceneManager().LoadScene("Test");
         }
 
