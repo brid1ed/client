@@ -238,8 +238,8 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
-  m_Antialiasing: 0
+  m_RenderPostProcessing: 1
+  m_Antialiasing: 1
   m_AntialiasingQuality: 2
   m_StopNaN: 0
   m_Dithering: 0
@@ -294,7 +294,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 8.81132
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -319,7 +319,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: -0.26840663, y: -2.1875672, z: -17.610754}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -440,10 +440,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e4644a5d1c5747d2a39a9d28979ed4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  team_gray: {fileID: 21300000, guid: a2cf172c36f51254a86f4ec22cb0164c, type: 3}
+  team_color: {fileID: 21300000, guid: c9faf2f336d49438ba5be169d6ce845c, type: 3}
   team_logo_image: {fileID: 487347951}
   game_logo_image: {fileID: 1790677848}
   game_title_image: {fileID: 2047351352}
-  netflix: {fileID: 8300000, guid: 53a5b9bafc9ad4449a7a28a4cdd54ab1, type: 3}
+  team_sfx: {fileID: 8300000, guid: e1b5f33b60db6af48848cb6c7e612346, type: 3}
   start_sound: {fileID: 8300000, guid: 71983adfb6c7c4092bdc8a06d00722d3, type: 3}
   Buttons: {fileID: 950419932}
   delay: 0.03
@@ -659,6 +661,69 @@ RectTransform:
   m_AnchoredPosition: {x: 101, y: -179}
   m_SizeDelta: {x: 600, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &955251645
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 955251647}
+  - component: {fileID: 955251646}
+  - component: {fileID: 955251648}
+  m_Layer: 0
+  m_Name: PostGlitch
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &955251646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 955251645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 0
+  sharedProfile: {fileID: 11400000, guid: 56a0eb7ca0c1d8143bd6eba71feaf381, type: 2}
+--- !u!4 &955251647
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 955251645}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &955251648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 955251645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76cffbe12fdf05240b86d471f9ad1a34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  glitch: {fileID: 955251646}
 --- !u!1 &993424453
 GameObject:
   m_ObjectHideFlags: 0
@@ -1254,3 +1319,4 @@ SceneRoots:
   - {fileID: 993424455}
   - {fileID: 671742310}
   - {fileID: 1202581771}
+  - {fileID: 955251647}

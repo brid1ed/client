@@ -88,7 +88,10 @@ namespace Manager
             
         }
         
-        public void Awake() { Init(); }
+        public new void Awake() {
+            base.Awake();
+            Init();
+        }
         
         
         #region ManagerGet
