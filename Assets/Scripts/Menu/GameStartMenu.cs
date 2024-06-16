@@ -15,7 +15,7 @@ namespace Menu
             animation = this.gameObject.GetComponent<GameStartAnimation>();
             
         }
-
+        
         public void Start() {
             GameManager.Instance.client.login.Connect();
             animation.Animation();

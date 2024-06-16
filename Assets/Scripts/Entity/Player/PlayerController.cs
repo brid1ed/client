@@ -5,8 +5,7 @@ using UnityEngine;
 
 namespace Entity {
     public class PlayerController : BaseEntity {
-        [SerializeField]
-        float moveSpeed;
+        [SerializeField] float moveSpeed;
         
         void Start() {
 
